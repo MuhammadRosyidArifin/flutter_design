@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -63,7 +64,8 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.black87,
                           ),
                           hintText: "Search you're looking for",
-                          hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
+                          hintStyle:
+                              TextStyle(color: Colors.grey, fontSize: 15),
                         ),
                       ),
                     ),
@@ -78,8 +80,9 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Promo Today',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      'UI Today',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 15),
                     SizedBox(
@@ -87,15 +90,20 @@ class _HomePageState extends State<HomePage> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          promoCard(''),
+                          InkWell(
+                            onTap: () {
+                              context.go('/design2');
+                            },
+                            child: promoCard(image: 'assets/images/home-page-design-2.png'),
+                          ),
                           const SizedBox(width: 8),
-                          promoCard(''),
+                          promoCard(image: ''),
                           const SizedBox(width: 8),
-                          promoCard(''),
+                          promoCard(image: ''),
                           const SizedBox(width: 8),
-                          promoCard(''),
+                          promoCard(image: ''),
                           const SizedBox(width: 8),
-                          promoCard(''),
+                          promoCard(image: ''),
                         ],
                       ),
                     ),
@@ -116,21 +124,41 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget promoCard(image) {
+  Widget promoCard({String image = ''}) {
     return AspectRatio(
-      aspectRatio: 2 / 3,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.orange,
-          borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(begin: Alignment.bottomRight, colors: [
+        aspectRatio: 2 / 3,
+        child: image == '' ? _textCard() : _imagesCard(image));
+  }
+
+  Widget _textCard(){
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          begin: Alignment.bottomRight,
+          colors: [
             Colors.black.withOpacity(.8),
             Colors.black.withOpacity(.1),
-          ]),
+          ],
         ),
-        child: const Center(
-          child: Text("Image"),
+      ),
+      child: const Center(child: Text('Images')),
+    );
+  }
+  Widget _imagesCard(image) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          begin: Alignment.bottomRight,
+          colors: [
+            Colors.black.withOpacity(.8),
+            Colors.black.withOpacity(.1),
+          ],
         ),
+        image: DecorationImage(fit: BoxFit.cover, image: AssetImage(image)),
       ),
     );
   }
