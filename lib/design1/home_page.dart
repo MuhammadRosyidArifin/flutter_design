@@ -91,13 +91,14 @@ class _HomePageState extends State<HomePage> {
                         scrollDirection: Axis.horizontal,
                         children: [
                           InkWell(
-                            onTap: () {
-                              context.go('/design2');
-                            },
-                            child: promoCard(image: 'assets/images/home-page-design-2.png'),
+                            onTap: () => context.go('/design2'),
+                            child: promoCard(
+                                image: 'assets/images/home-page-design-2.png'),
                           ),
                           const SizedBox(width: 8),
-                          promoCard(image: ''),
+                          InkWell(
+                              onTap: () => context.go('/design3'),
+                              child: promoCard(image: '')),
                           const SizedBox(width: 8),
                           promoCard(image: ''),
                           const SizedBox(width: 8),
@@ -130,7 +131,7 @@ class _HomePageState extends State<HomePage> {
         child: image == '' ? _textCard() : _imagesCard(image));
   }
 
-  Widget _textCard(){
+  Widget _textCard() {
     return Container(
       decoration: BoxDecoration(
         color: Colors.orange,
@@ -146,6 +147,7 @@ class _HomePageState extends State<HomePage> {
       child: const Center(child: Text('Images')),
     );
   }
+
   Widget _imagesCard(image) {
     return Container(
       decoration: BoxDecoration(
